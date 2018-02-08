@@ -1,0 +1,43 @@
+#!/usr/bin/env groovy
+pipeline {
+
+    agent any
+
+    options {
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+
+    tools {
+        gradle 'Gradle-4.0.1'
+    }
+
+
+    stages {
+
+        stage('Clone Branch') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build/Test') {
+          steps {
+                  sh 'gradle clean build'
+          }
+
+          post {
+              always {
+                  junit '**/build/test-results/test/*.xml'
+              }
+          }
+        }
+    }
+
+     post {
+
+        always {
+            jacoco()
+        }
+    }
+}
