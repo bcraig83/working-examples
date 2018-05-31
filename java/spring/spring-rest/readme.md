@@ -1,0 +1,1 @@
+Based on http://www.baeldung.com/building-a-restful-web-service-with-spring-and-java-based-configuration#overview
