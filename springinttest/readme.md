@@ -1,0 +1,1 @@
+The following project contains some samples of Spring integration tests.
